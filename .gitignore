@@ -3,3 +3,9 @@
 *.pyc
 data/*
 logs/*
+# OSX dir files
+.DS_Store
+# dataset
+*.zip
+roi2/
+roi2_labeled/
