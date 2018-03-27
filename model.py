@@ -5,7 +5,7 @@ class Model(object):
 
     @staticmethod
     def inference(x, drop_rate):
-        with tf.variable_scope('hidden1'):
+        with tf.variable_scope('hidden1',reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(x, filters=48, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -13,7 +13,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden1 = dropout
 
-        with tf.variable_scope('hidden2'):
+        with tf.variable_scope('hidden2', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden1, filters=64, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -21,7 +21,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden2 = dropout
 
-        with tf.variable_scope('hidden3'):
+        with tf.variable_scope('hidden3', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden2, filters=128, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -29,7 +29,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden3 = dropout
 
-        with tf.variable_scope('hidden4'):
+        with tf.variable_scope('hidden4', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden3, filters=160, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -37,7 +37,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden4 = dropout
 
-        with tf.variable_scope('hidden5'):
+        with tf.variable_scope('hidden5', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden4, filters=192, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -45,7 +45,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden5 = dropout
 
-        with tf.variable_scope('hidden6'):
+        with tf.variable_scope('hidden6', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden5, filters=192, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -53,7 +53,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden6 = dropout
 
-        with tf.variable_scope('hidden7'):
+        with tf.variable_scope('hidden7', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden6, filters=192, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -61,7 +61,7 @@ class Model(object):
             dropout = tf.layers.dropout(pool, rate=drop_rate)
             hidden7 = dropout
 
-        with tf.variable_scope('hidden8'):
+        with tf.variable_scope('hidden8', reuse=tf.AUTO_REUSE):
             conv = tf.layers.conv2d(hidden7, filters=192, kernel_size=[5, 5], padding='same')
             norm = tf.layers.batch_normalization(conv)
             activation = tf.nn.relu(norm)
@@ -71,35 +71,35 @@ class Model(object):
 
         flatten = tf.reshape(hidden8, [-1, 4 * 4 * 192])
 
-        with tf.variable_scope('hidden9'):
+        with tf.variable_scope('hidden9', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(flatten, units=3072, activation=tf.nn.relu)
             hidden9 = dense
 
-        with tf.variable_scope('hidden10'):
+        with tf.variable_scope('hidden10', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden9, units=3072, activation=tf.nn.relu)
             hidden10 = dense
 
-        with tf.variable_scope('digit_length'):
+        with tf.variable_scope('digit_length', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=7)
             length = dense
 
-        with tf.variable_scope('digit1'):
+        with tf.variable_scope('digit1', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=11)
             digit1 = dense
 
-        with tf.variable_scope('digit2'):
+        with tf.variable_scope('digit2', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=11)
             digit2 = dense
 
-        with tf.variable_scope('digit3'):
+        with tf.variable_scope('digit3', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=11)
             digit3 = dense
 
-        with tf.variable_scope('digit4'):
+        with tf.variable_scope('digit4', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=11)
             digit4 = dense
 
-        with tf.variable_scope('digit5'):
+        with tf.variable_scope('digit5', reuse=tf.AUTO_REUSE):
             dense = tf.layers.dense(hidden10, units=11)
             digit5 = dense
 

@@ -6,7 +6,7 @@ from meta import Meta
 from donkey import Donkey
 from model import Model
 from evaluator import Evaluator
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 tf.app.flags.DEFINE_string('data_dir', './data', 'Directory to read TFRecords files')
 tf.app.flags.DEFINE_string('train_logdir', './logs/train', 'Directory to write training logs')
 tf.app.flags.DEFINE_string('restore_checkpoint', None,

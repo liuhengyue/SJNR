@@ -1,6 +1,6 @@
 import tensorflow as tf
 from model import Model
-
+from PIL import Image
 tf.app.flags.DEFINE_string('image', None, 'Path to image file')
 tf.app.flags.DEFINE_string('restore_checkpoint', None,
                            'Path to restore checkpoint (without postfix), e.g. ./logs/train/model.ckpt-100')
@@ -10,8 +10,10 @@ FLAGS = tf.app.flags.FLAGS
 def main(_):
     path_to_image_file = FLAGS.image
     path_to_restore_checkpoint_file = FLAGS.restore_checkpoint
-
+    im = Image.open(path_to_image_file)
+    width, height = im.size
     image = tf.image.decode_jpeg(tf.read_file(path_to_image_file), channels=3)
+    image = tf.image.crop_to_bounding_box(image, height/4, width/2 - 32, 64, 64)
     image = tf.reshape(image, [64, 64, 3])
     image = tf.image.convert_image_dtype(image, dtype=tf.float32)
     image = tf.multiply(tf.subtract(image, 0.5), 2)

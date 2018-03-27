@@ -1,0 +1,3 @@
+python convert_to_tfrecords.py --data_dir /data2/Henry/SVHN/
+python train.py --data_dir /data2/Henry/SVHN/ --train_logdir ./logs/train
+python inference.py --image /data2/Henry/SVHN/12.jpg --restore_checkpoint ./logs/train/latest.ckpt
