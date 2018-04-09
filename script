@@ -1,3 +1,10 @@
 python convert_to_tfrecords.py --data_dir /data2/Henry/SVHN/
 python train.py --data_dir /data2/Henry/SVHN/ --train_logdir ./logs/train
 python inference.py --image /data2/Henry/SVHN/12.jpg --restore_checkpoint ./logs/train/latest.ckpt
+python test.py --restore_checkpoint ./logs/train/latest.ckpt --path test_dir
+
+./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/
+./build/examples/openpose/openpose.bin --image_dir /data2/Henry/jersey_number/train/1/ --write_keypoint_json /data2/Henry/jersey_number/train/1/
+./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/ --display 0 --render_pose 0
+
+
