@@ -51,12 +51,13 @@ def crop_images(image_path, crop_path):
 		img_cropped = img.crop((0.9*min(keypoints_x), min(keypoints_y), 1.1*max(keypoints_x), 0.9*max(keypoints_y)))
 		print crop_path + os.path.splitext(os.path.basename(image_path))[0] + '_' + str(i) + '_cropped.png'
 		img_cropped.save(crop_path + os.path.splitext(os.path.basename(image_path))[0] + '_' + str(i) + '_cropped.png')
-		# plt.scatter(keypoints_x, keypoints_y, c='r')
-		# plt.plot(keypoints_x, keypoints_y, c='r')
-		# break
+		plt.scatter(keypoints_x, keypoints_y, c='r')
+		plt.plot(keypoints_x, keypoints_y, c='r')
+		break
 
 
 	# plt.show()
+	plt.savefig(crop_path + os.path.splitext(os.path.basename(image_path))[0] + '_boxed.png')
 
 if __name__ == '__main__':
 	tf.app.run(main=main)
