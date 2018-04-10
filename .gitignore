@@ -2,7 +2,7 @@
 .ipynb_checkpoints
 *.pyc
 data/*
-logs/*
+# logs/*
 # OSX dir files
 .DS_Store
 # dataset
