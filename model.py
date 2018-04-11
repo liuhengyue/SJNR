@@ -91,19 +91,19 @@ class Model(object):
             dense = tf.layers.dense(hidden10, units=11)
             digit2 = dense
 
-        with tf.variable_scope('digit3', reuse=tf.AUTO_REUSE):
-            dense = tf.layers.dense(hidden10, units=11)
-            digit3 = dense
+#        with tf.variable_scope('digit3', reuse=tf.AUTO_REUSE):
+#            dense = tf.layers.dense(hidden10, units=11)
+#            digit3 = dense
 
-        with tf.variable_scope('digit4', reuse=tf.AUTO_REUSE):
-            dense = tf.layers.dense(hidden10, units=11)
-            digit4 = dense
+#        with tf.variable_scope('digit4', reuse=tf.AUTO_REUSE):
+#            dense = tf.layers.dense(hidden10, units=11)
+#            digit4 = dense
 
-        with tf.variable_scope('digit5', reuse=tf.AUTO_REUSE):
-            dense = tf.layers.dense(hidden10, units=11)
-            digit5 = dense
+#        with tf.variable_scope('digit5', reuse=tf.AUTO_REUSE):
+#            dense = tf.layers.dense(hidden10, units=11)
+#            digit5 = dense
 
-        length_logits, digits_logits = length, tf.stack([digit1, digit2, digit3, digit4, digit5], axis=1)
+        length_logits, digits_logits = length, tf.stack([digit1, digit2], axis=1)
         return length_logits, digits_logits
 
     @staticmethod
