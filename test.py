@@ -20,6 +20,7 @@ def main(_):
     files = getTestFiles(path)
     num = 0
     correct = 0
+    image_paths = []
     number_predictions = []
     labels = []
     for key in files:
@@ -32,6 +33,7 @@ def main(_):
         # image = tf.image.resize_image_with_crop_or_pad(image, 64, 64)
         for i in range(0, len(files[key])):
             im = Image.open(files[key][i])
+            image_paths += [files[key][i]]
             width, height = im.size
             # resize method 1
             # images[i] = tf.image.crop_to_bounding_box(images[i], height / 5, width / 2 - 32, 64, 64)
@@ -78,15 +80,26 @@ def main(_):
             # correct = correct + class_correct
             # print 'Accuracy: ', class_correct / class_num
         # break
-    acc, acc_op = tf.metrics.accuracy(labels = labels, predictions = number_predictions)
+    acc, acc_op = tf.metrics.accuracy(labels = tf.Variable(labels), predictions = tf.Variable(number_predictions))
+    # auc, auc_op = tf.metrics.auc(labels = tf.Variable(labels), predictions = tf.Variable(number_predictions))
+    pre, pre_op = tf.metrics.precision(labels = tf.Variable(labels), predictions = tf.Variable(number_predictions))
+    recall, recall_op = tf.metrics.recall(labels = tf.Variable(labels), predictions = tf.Variable(number_predictions))
     sess = tf.InteractiveSession()
     tf.global_variables_initializer().run()
     tf.local_variables_initializer().run()
     sess.run(acc_op)
+    #sess.run(auc_op)
+    sess.run(pre_op)
+    sess.run(recall_op)
     print(labels)
     print(number_predictions)
     # sess.run(init)    
-    print("Accuracy: " + str(sess.run(acc)) + " over " + str(num) + " images.")
+    print("Number of test images: " + str(num) + ".")
+    print("Accuracy: " + str(sess.run(acc)))
+    print("Precision: " + str(sess.run(pre)))
+    print("Recall: " + str(sess.run(recall)))
+    confusion_matrix(image_paths, labels, number_predictions)
+    # print("Area Under the Curve (AUC): " + str(sess.run(auc)))
     # print '%d total Accuracy: %f' % (num, correct / num)
 
 
@@ -95,6 +108,11 @@ def main(_):
 # print 'length: %d' % length_prediction_val
 # print 'digits: %s' % digits_prediction_string_val
 
+def confusion_matrix(image_paths, labels, predictions):
+    file = open("data.txt", "w")
+    lines = [str(l)+" "+str(p)+" "+str(d)+"\n" for l, p, d in itertools.izip(labels, predictions, image_paths)]
+    file.writelines(lines)
+    file.close()
 
 def display(images):
     sess = tf.Session()

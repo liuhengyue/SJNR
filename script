@@ -1,6 +1,6 @@
 python convert_to_tfrecords.py --data_dir /data2/Henry/SVHN/
 python train.py --data_dir /data2/Henry/SVHN/ --train_logdir ./logs/train
-python inference.py --image /data2/Henry/SVHN/12.jpg --restore_checkpoint ./logs/train/latest.ckpt
+python inference.py --restore_checkpoint ./logs/train/latest.ckpt --image /data2/Henry/SVHN/12.jpg 
 python test.py --restore_checkpoint ./logs/train/latest.ckpt --path test_dir
 
 ./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/

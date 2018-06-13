@@ -9,3 +9,4 @@ data/*
 *.zip
 roi2/
 roi2_labeled/
+data.txt
