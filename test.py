@@ -24,7 +24,7 @@ def main(_):
     number_predictions = []
     labels = []
     for key in files:
-        print key
+        print(key)
         # print files['1']
         class_num = len(files[key])
         num = num + class_num
@@ -72,7 +72,7 @@ def main(_):
                 [length_predictions, digits_predictions_string])
             # print 'length: ', length_predictions_val
             # print 'digits: ', digits_predictions_string_val
-            predictions = [int(d[:l]) for l, d in itertools.izip(length_predictions_val, digits_predictions_string_val)]
+            predictions = [int(d[:l]) for l, d in zip(length_predictions_val, digits_predictions_string_val)]
             # print predictions
             number_predictions += predictions
             labels += [int(key)] * class_num
@@ -129,10 +129,11 @@ def getTestFiles(root):
         return test_set
     for subdir in subdirs:
         # print subdir
-        path = os.path.join(root, subdir)
-        # print path
-        subfiles = [os.path.join(path, name) for name in next(os.walk(path))[2] if fnmatch(name, "*.png")]
-        test_set[subdir] = subfiles
+        if subdir != 'negative':
+            path = os.path.join(root, subdir)
+            # print path
+            subfiles = [os.path.join(path, name) for name in next(os.walk(path))[2] if fnmatch(name, "*.png")]
+            test_set[subdir] = subfiles
     return test_set
 
 def plot_figures(figures):
